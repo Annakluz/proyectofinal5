@@ -26,11 +26,11 @@ let crearTema = function (tema) {
     // Insertamos el contenido
     $contenidoCelda.text(contenido); 
     //Creamos la celda del autor
-    let $autorCelda = $("<tr />");
+    let $autorCelda = $("<td />");
     //Insertamos el autor
     $autorCelda.text(nombreTema);
     //Creamos la celda de las respuestas
-    let $respuestasCelda = $("<tr />");
+    let $respuestasCelda = $("<td />");
     //Insertamos el numero de respuestas
     $respuestasCelda.text(respuestas);
     
@@ -40,6 +40,20 @@ let crearTema = function (tema) {
     
     //Agregamos filas a la tabla
     $themeList.append($tr);
+}
+
+
+let agregarTema = function (e){
+    e.preventDefault();
+    let tema = $("#nombre-tema").val();
+    let autor = $("#nombre-autor").val();
+    $.post(api.url, {
+        author_name: autor,
+        content: tema
+    }, function(tema){
+        crearTema(tema);
+        $("#myModal").modal("hide");
+    });
 }
 
 $(document).ready(cargarPagina);
