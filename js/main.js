@@ -4,13 +4,14 @@ let api = {
 
 let $themeList = $("#theme-list");
 
-let cargarPagina = function (){
+let cargarPagina = function () {
     cargarTemas();
     $("#add-form").submit(agregarTema);
+    $("#form-busqueda").submit(filtrarResultados);
 };
 
-let cargarTemas = function(){
-    $.getJSON(api.url, function(temas){
+let cargarTemas = function () {
+    $.getJSON(api.url, function (temas) {
         temas.forEach(crearTema);
     });
 }
@@ -24,7 +25,7 @@ let crearTema = function (tema) {
     // Creamos la celda del contenido 
     let $contenidoCelda = $("<td />");
     // Insertamos el contenido
-    $contenidoCelda.text(contenido); 
+    $contenidoCelda.text(contenido);
     //Creamos la celda del autor
     let $autorCelda = $("<td />");
     //Insertamos el autor
@@ -33,27 +34,27 @@ let crearTema = function (tema) {
     let $respuestasCelda = $("<td />");
     //Insertamos el numero de respuestas
     $respuestasCelda.text(respuestas);
-    
+
     $tr.append($contenidoCelda);
     $tr.append($autorCelda);
     $tr.append($respuestasCelda);
-    
+
     //Agregamos filas a la tabla
     $themeList.append($tr);
 }
 
 
-let agregarTema = function (e){
+let agregarTema = function (e) {
     e.preventDefault();
     let tema = $("#nombre-tema").val();
     let autor = $("#nombre-autor").val();
     let contador = 0;
-    
+
     $.post(api.url, {
         author_name: autor,
         content: tema,
-        responses_count:contador,
-    }, function(tema){
+        responses_count: contador,
+    }, function (tema) {
         crearTema(tema);
         $("#myModal").modal("hide");
     });
@@ -61,15 +62,21 @@ let agregarTema = function (e){
 
 //establecer funcion para filtar los resultados 
 
-let filtrarResultados = function(e){
-    e.preventDefault(); //para evitar que se recarge la pag. 
-    let formaBusqueda= $("#exampleInputName2").val().toLowerCase();
-    
-    let temasFiltrados= agregarTema.filter(function(tema){
-        return tema.author_name.toLocaleLowerCase().indexOf(formaBusqueda) >= 0;
-    });
-    
-    cargarTemas(temasFiltrados);
+function filtrarResultados(e){
+    e.preventDefault();
+    let parametrosBusqueda= $("#exampleInputName2").val().toLowerCase();
+    console.log(parametrosBusqueda);
 };
+
+/*let filtrarResultados = function (e) {
+    e.preventDefault(); //para evitar que se recarge la pag. 
+    let formaBusqueda = $("#exampleInputName2").val().toLowerCase();
+
+    let temasFiltrados = $themeList.filter(function (tema) {
+        return tema.contenido.toLocaleLowerCase().indexOf(formaBusqueda) >= 0;
+    });
+
+    cargarTemas(temasFiltrados);
+};*/
 
 $(document).ready(cargarPagina);
