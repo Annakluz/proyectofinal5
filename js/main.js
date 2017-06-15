@@ -65,7 +65,11 @@ let agregarTema = function (e) {
 function filtrarResultados(e){
     e.preventDefault();
     let parametrosBusqueda= $("#exampleInputName2").val().toLowerCase();
-    console.log(parametrosBusqueda);
+    //console.log(parametrosBusqueda);
+    let temasFiltrados= cargarTemas.filter(function(tema){
+        return tema.content.toLowerCase().indexOf(parametrosBusqueda) >= 0;
+    });
+    //crearTema(temasFiltrados);
 };
 
 /*let filtrarResultados = function (e) {
