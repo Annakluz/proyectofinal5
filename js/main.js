@@ -47,9 +47,12 @@ let agregarTema = function (e){
     e.preventDefault();
     let tema = $("#nombre-tema").val();
     let autor = $("#nombre-autor").val();
+    let contador = 0;
+    
     $.post(api.url, {
         author_name: autor,
-        content: tema
+        content: tema,
+        responses_count:contador,
     }, function(tema){
         crearTema(tema);
         $("#myModal").modal("hide");
