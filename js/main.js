@@ -59,4 +59,17 @@ let agregarTema = function (e){
     });
 }
 
+//establecer funcion para filtar los resultados 
+
+let filtrarResultados = function(e){
+    e.preventDefault(); //para evitar que se recarge la pag. 
+    let formaBusqueda= $("#exampleInputName2").val().toLowerCase();
+    
+    let temasFiltrados= agregarTema.filter(function(tema){
+        return tema.author_name.toLocaleLowerCase().indexOf(formaBusqueda) >= 0;
+    });
+    
+    cargarTemas(temasFiltrados);
+};
+
 $(document).ready(cargarPagina);
