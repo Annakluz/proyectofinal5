@@ -12,12 +12,28 @@
 <body>
 
     <h1>FORO COOL </h1>
-    <section class="contenedor">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-    + CREAR TEMA
-      </button>
+     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+    + Agregar Tarea
+  </button>
 
-    </section>
+  <table class="table table-striped table-responsive">
+    <thead>
+      <th>TEMA</th>
+      <th>AUTOR</th>
+      <th>RESPUESTAS</th>
+      
+    </thead>
+    <tbody id="theme-list">
+      <tr>
+        <td>Tema</td>
+        <td>Autor</td>
+        <td>No. Respuestas</td>
+        
+      </tr>
+    </tbody>
+  </table>
+   
+   <!--modal-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <form id="add-form">
